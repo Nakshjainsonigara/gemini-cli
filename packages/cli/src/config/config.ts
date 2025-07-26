@@ -471,19 +471,22 @@ function getEffectiveModel(argv: CliArgs, settings: Settings): string {
   if (argv.model && argv.model !== DEFAULT_GEMINI_MODEL) {
     return argv.model;
   }
-  
+
   // Otherwise, use the model from the registry if available
   if (settings.modelRegistry) {
     const registry = ModelRegistry.fromJSON(settings.modelRegistry);
     const currentModel = registry.getCurrentModel();
-    
+
     // Only use registry model if it's for Gemini provider for now
     // (until we implement full multi-provider support)
-    if (registry.getCurrentProvider() === ModelProvider.GEMINI && currentModel) {
+    if (
+      registry.getCurrentProvider() === ModelProvider.GEMINI &&
+      currentModel
+    ) {
       return currentModel;
     }
   }
-  
+
   // Fall back to CLI arg or default
   return argv.model || DEFAULT_GEMINI_MODEL;
 }

@@ -29,8 +29,8 @@ describe('modelsCommand', () => {
         messageType: 'info',
         content: expect.stringContaining('Available AI Models and Providers:'),
       });
-      
-      const content = (result as any).content;
+
+      const content = (result as { content: string }).content;
       expect(content).toContain('Google Gemini');
       expect(content).toContain('OpenAI');
       expect(content).toContain('Anthropic Claude');
@@ -60,12 +60,17 @@ describe('modelsCommand', () => {
 
   describe('set command', () => {
     it('should switch to a valid model', async () => {
-      const result = await modelsCommand.action!(mockContext, 'set openai gpt-4o');
+      const result = await modelsCommand.action!(
+        mockContext,
+        'set openai gpt-4o',
+      );
 
       expect(result).toEqual({
         type: 'message',
         messageType: 'info',
-        content: expect.stringContaining('Switched to GPT-4o (gpt-4o) from openai'),
+        content: expect.stringContaining(
+          'Switched to GPT-4o (gpt-4o) from openai',
+        ),
       });
 
       expect(mockSettingsSetValue).toHaveBeenCalledWith(
@@ -74,12 +79,15 @@ describe('modelsCommand', () => {
         expect.objectContaining({
           currentProvider: ModelProvider.OPENAI,
           currentModel: 'gpt-4o',
-        })
+        }),
       );
     });
 
     it('should handle provider aliases', async () => {
-      const result = await modelsCommand.action!(mockContext, 'set claude claude-3-5-sonnet-20241022');
+      const result = await modelsCommand.action!(
+        mockContext,
+        'set claude claude-3-5-sonnet-20241022',
+      );
 
       expect(result).toEqual({
         type: 'message',
@@ -89,7 +97,10 @@ describe('modelsCommand', () => {
     });
 
     it('should show error for unknown provider', async () => {
-      const result = await modelsCommand.action!(mockContext, 'set unknown model');
+      const result = await modelsCommand.action!(
+        mockContext,
+        'set unknown model',
+      );
 
       expect(result).toEqual({
         type: 'message',
@@ -99,7 +110,10 @@ describe('modelsCommand', () => {
     });
 
     it('should show error for invalid model', async () => {
-      const result = await modelsCommand.action!(mockContext, 'set openai invalid-model');
+      const result = await modelsCommand.action!(
+        mockContext,
+        'set openai invalid-model',
+      );
 
       expect(result).toEqual({
         type: 'message',
@@ -131,7 +145,10 @@ describe('modelsCommand', () => {
 
   describe('key command', () => {
     it('should set API key for provider', async () => {
-      const result = await modelsCommand.action!(mockContext, 'key openai sk-test-key-123');
+      const result = await modelsCommand.action!(
+        mockContext,
+        'key openai sk-test-key-123',
+      );
 
       expect(result).toEqual({
         type: 'message',
@@ -148,12 +165,15 @@ describe('modelsCommand', () => {
               apiKey: 'sk-test-key-123',
             }),
           }),
-        })
+        }),
       );
     });
 
     it('should handle multi-word API keys', async () => {
-      const result = await modelsCommand.action!(mockContext, 'key anthropic sk-ant-key with spaces');
+      const result = await modelsCommand.action!(
+        mockContext,
+        'key anthropic sk-ant-key with spaces',
+      );
 
       expect(result).toEqual({
         type: 'message',
@@ -163,7 +183,10 @@ describe('modelsCommand', () => {
     });
 
     it('should show error for unknown provider', async () => {
-      const result = await modelsCommand.action!(mockContext, 'key unknown sk-key');
+      const result = await modelsCommand.action!(
+        mockContext,
+        'key unknown sk-key',
+      );
 
       expect(result).toEqual({
         type: 'message',
@@ -190,7 +213,9 @@ describe('modelsCommand', () => {
       expect(result).toEqual({
         type: 'message',
         messageType: 'info',
-        content: expect.stringContaining('Current model: Gemini 2.5 Pro (gemini-2.5-pro) from Google Gemini'),
+        content: expect.stringContaining(
+          'Current model: Gemini 2.5 Pro (gemini-2.5-pro) from Google Gemini',
+        ),
       });
     });
   });
@@ -219,7 +244,10 @@ describe('modelsCommand', () => {
     });
 
     it('should complete models for provider', async () => {
-      const completion = await modelsCommand.completion!(mockContext, 'set openai gpt');
+      const completion = await modelsCommand.completion!(
+        mockContext,
+        'set openai gpt',
+      );
       expect(completion).toContain('gpt-4o');
     });
 
@@ -236,8 +264,9 @@ describe('modelsCommand', () => {
         currentModel: 'gpt-4o',
       });
       existingRegistry.setProviderApiKey(ModelProvider.OPENAI, 'test-key');
-      
-      mockContext.services.settings.merged.modelRegistry = existingRegistry.toJSON();
+
+      mockContext.services.settings.merged.modelRegistry =
+        existingRegistry.toJSON();
     });
 
     it('should use existing registry data', async () => {
@@ -246,7 +275,9 @@ describe('modelsCommand', () => {
       expect(result).toEqual({
         type: 'message',
         messageType: 'info',
-        content: expect.stringContaining('Current model: GPT-4o (gpt-4o) from OpenAI'),
+        content: expect.stringContaining(
+          'Current model: GPT-4o (gpt-4o) from OpenAI',
+        ),
       });
     });
   });

@@ -1042,9 +1042,9 @@ describe('getEffectiveModel', () => {
     const argv = await parseArguments();
     const settings: Settings = {
       modelRegistry: {
-        currentProvider: 'gemini' as any,
+        currentProvider: ModelProvider.GEMINI,
         currentModel: 'gemini-2.5-flash',
-        providers: {} as any,
+        providers: {},
       },
     };
     const config = await loadCliConfig(settings, [], 'test-session', argv);
@@ -1064,9 +1064,9 @@ describe('getEffectiveModel', () => {
     const argv = await parseArguments();
     const settings: Settings = {
       modelRegistry: {
-        currentProvider: 'gemini' as any,
+        currentProvider: ModelProvider.GEMINI,
         currentModel: 'gemini-2.5-flash',
-        providers: {} as any,
+        providers: {},
       },
     };
     const config = await loadCliConfig(settings, [], 'test-session', argv);
@@ -1078,9 +1078,9 @@ describe('getEffectiveModel', () => {
     const argv = await parseArguments();
     const settings: Settings = {
       modelRegistry: {
-        currentProvider: 'openai' as any,
+        currentProvider: ModelProvider.OPENAI,
         currentModel: 'gpt-4o',
-        providers: {} as any,
+        providers: {},
       },
     };
     const config = await loadCliConfig(settings, [], 'test-session', argv);

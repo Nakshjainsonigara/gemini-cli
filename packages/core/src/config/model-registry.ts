@@ -49,7 +49,7 @@ export class ModelRegistry {
               id: 'gemini-2.5-pro',
               name: 'Gemini 2.5 Pro',
               provider: ModelProvider.GEMINI,
-              description: 'Google\'s most capable AI model',
+              description: "Google's most capable AI model",
               contextWindow: 1000000,
               supportsStreaming: true,
             },
@@ -79,7 +79,7 @@ export class ModelRegistry {
               id: 'gpt-4o',
               name: 'GPT-4o',
               provider: ModelProvider.OPENAI,
-              description: 'OpenAI\'s most advanced multimodal model',
+              description: "OpenAI's most advanced multimodal model",
               contextWindow: 128000,
               supportsStreaming: true,
             },
@@ -109,7 +109,7 @@ export class ModelRegistry {
               id: 'claude-3-5-sonnet-20241022',
               name: 'Claude 3.5 Sonnet',
               provider: ModelProvider.ANTHROPIC,
-              description: 'Anthropic\'s most intelligent model',
+              description: "Anthropic's most intelligent model",
               contextWindow: 200000,
               supportsStreaming: true,
             },
@@ -125,7 +125,7 @@ export class ModelRegistry {
               id: 'claude-3-opus-20240229',
               name: 'Claude 3 Opus',
               provider: ModelProvider.ANTHROPIC,
-              description: 'Anthropic\'s most powerful model',
+              description: "Anthropic's most powerful model",
               contextWindow: 200000,
               supportsStreaming: true,
             },
@@ -146,7 +146,7 @@ export class ModelRegistry {
 
   getCurrentModelInfo(): ModelInfo | undefined {
     const provider = this.data.providers[this.data.currentProvider];
-    return provider?.models.find(m => m.id === this.data.currentModel);
+    return provider?.models.find((m) => m.id === this.data.currentModel);
   }
 
   getProviders(): ProviderConfig[] {
@@ -162,7 +162,9 @@ export class ModelRegistry {
   }
 
   getAllModels(): ModelInfo[] {
-    return Object.values(this.data.providers).flatMap(provider => provider.models);
+    return Object.values(this.data.providers).flatMap(
+      (provider) => provider.models,
+    );
   }
 
   setCurrentModel(provider: ModelProvider, modelId: string): boolean {
@@ -171,7 +173,7 @@ export class ModelRegistry {
       return false;
     }
 
-    const model = providerConfig.models.find(m => m.id === modelId);
+    const model = providerConfig.models.find((m) => m.id === modelId);
     if (!model) {
       return false;
     }

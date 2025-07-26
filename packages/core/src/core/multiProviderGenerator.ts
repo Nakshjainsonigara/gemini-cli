@@ -54,7 +54,7 @@ export abstract class ProviderContentGenerator implements ContentGenerator {
  */
 export class OpenAIContentGenerator extends ProviderContentGenerator {
   async generateContent(
-    request: GenerateContentParameters,
+    _request: GenerateContentParameters,
   ): Promise<GenerateContentResponse> {
     // For now, throw an error indicating this is not yet implemented
     // In a real implementation, this would call OpenAI's API
@@ -64,7 +64,7 @@ export class OpenAIContentGenerator extends ProviderContentGenerator {
   }
 
   async generateContentStream(
-    request: GenerateContentParameters,
+    _request: GenerateContentParameters,
   ): Promise<AsyncGenerator<GenerateContentResponse>> {
     // For now, throw an error indicating this is not yet implemented
     throw new Error(
@@ -73,7 +73,7 @@ export class OpenAIContentGenerator extends ProviderContentGenerator {
   }
 
   async countTokens(
-    request: CountTokensParameters,
+    _request: CountTokensParameters,
   ): Promise<CountTokensResponse> {
     // For now, throw an error indicating this is not yet implemented
     throw new Error(
@@ -82,7 +82,7 @@ export class OpenAIContentGenerator extends ProviderContentGenerator {
   }
 
   async embedContent(
-    request: EmbedContentParameters,
+    _request: EmbedContentParameters,
   ): Promise<EmbedContentResponse> {
     // For now, throw an error indicating this is not yet implemented
     throw new Error(
@@ -96,7 +96,7 @@ export class OpenAIContentGenerator extends ProviderContentGenerator {
  */
 export class AnthropicContentGenerator extends ProviderContentGenerator {
   async generateContent(
-    request: GenerateContentParameters,
+    _request: GenerateContentParameters,
   ): Promise<GenerateContentResponse> {
     // For now, throw an error indicating this is not yet implemented
     // In a real implementation, this would call Anthropic's API
@@ -106,7 +106,7 @@ export class AnthropicContentGenerator extends ProviderContentGenerator {
   }
 
   async generateContentStream(
-    request: GenerateContentParameters,
+    _request: GenerateContentParameters,
   ): Promise<AsyncGenerator<GenerateContentResponse>> {
     // For now, throw an error indicating this is not yet implemented
     throw new Error(
@@ -115,7 +115,7 @@ export class AnthropicContentGenerator extends ProviderContentGenerator {
   }
 
   async countTokens(
-    request: CountTokensParameters,
+    _request: CountTokensParameters,
   ): Promise<CountTokensResponse> {
     // For now, throw an error indicating this is not yet implemented
     throw new Error(
@@ -124,7 +124,7 @@ export class AnthropicContentGenerator extends ProviderContentGenerator {
   }
 
   async embedContent(
-    request: EmbedContentParameters,
+    _request: EmbedContentParameters,
   ): Promise<EmbedContentResponse> {
     // For now, throw an error indicating this is not yet implemented
     throw new Error(
