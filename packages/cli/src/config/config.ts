@@ -20,6 +20,8 @@ import {
   TelemetryTarget,
   FileFilteringOptions,
   IdeClient,
+  ModelRegistry,
+  ModelProvider,
 } from '@google/gemini-cli-core';
 import { Settings } from './settings.js';
 
@@ -413,7 +415,7 @@ export async function loadCliConfig(
     cwd: process.cwd(),
     fileDiscoveryService: fileService,
     bugCommand: settings.bugCommand,
-    model: argv.model!,
+    model: getEffectiveModel(argv, settings),
     extensionContextFilePaths,
     maxSessionTurns: settings.maxSessionTurns ?? -1,
     experimentalAcp: argv.experimentalAcp || false,
@@ -459,4 +461,29 @@ function mergeExcludeTools(
     }
   }
   return [...allExcludeTools];
+}
+
+/**
+ * Gets the effective model to use based on CLI args and model registry settings
+ */
+function getEffectiveModel(argv: CliArgs, settings: Settings): string {
+  // If model is explicitly provided via CLI, use it (maintains backward compatibility)
+  if (argv.model && argv.model !== DEFAULT_GEMINI_MODEL) {
+    return argv.model;
+  }
+  
+  // Otherwise, use the model from the registry if available
+  if (settings.modelRegistry) {
+    const registry = ModelRegistry.fromJSON(settings.modelRegistry);
+    const currentModel = registry.getCurrentModel();
+    
+    // Only use registry model if it's for Gemini provider for now
+    // (until we implement full multi-provider support)
+    if (registry.getCurrentProvider() === ModelProvider.GEMINI && currentModel) {
+      return currentModel;
+    }
+  }
+  
+  // Fall back to CLI arg or default
+  return argv.model || DEFAULT_GEMINI_MODEL;
 }

@@ -1012,3 +1012,78 @@ describe('loadCliConfig ideMode', () => {
     expect(config.getIdeMode()).toBe(false);
   });
 });
+
+describe('getEffectiveModel', () => {
+  const originalArgv = process.argv;
+  const originalEnv = { ...process.env };
+
+  beforeEach(() => {
+    vi.resetAllMocks();
+    vi.mocked(os.homedir).mockReturnValue('/mock/home/user');
+    process.env.GEMINI_API_KEY = 'test-api-key';
+  });
+
+  afterEach(() => {
+    process.argv = originalArgv;
+    process.env = originalEnv;
+    vi.restoreAllMocks();
+  });
+
+  it('should use CLI arg model when explicitly provided', async () => {
+    process.argv = ['node', 'script.js', '--model', 'gemini-1.5-pro'];
+    const argv = await parseArguments();
+    const settings: Settings = {};
+    const config = await loadCliConfig(settings, [], 'test-session', argv);
+    expect(config.getModel()).toBe('gemini-1.5-pro');
+  });
+
+  it('should use model from registry when no CLI arg provided', async () => {
+    process.argv = ['node', 'script.js'];
+    const argv = await parseArguments();
+    const settings: Settings = {
+      modelRegistry: {
+        currentProvider: 'gemini' as any,
+        currentModel: 'gemini-2.5-flash',
+        providers: {} as any,
+      },
+    };
+    const config = await loadCliConfig(settings, [], 'test-session', argv);
+    expect(config.getModel()).toBe('gemini-2.5-flash');
+  });
+
+  it('should fall back to default when no CLI arg and no registry', async () => {
+    process.argv = ['node', 'script.js'];
+    const argv = await parseArguments();
+    const settings: Settings = {};
+    const config = await loadCliConfig(settings, [], 'test-session', argv);
+    expect(config.getModel()).toBe('gemini-2.5-pro'); // DEFAULT_GEMINI_MODEL
+  });
+
+  it('should prioritize CLI arg over registry', async () => {
+    process.argv = ['node', 'script.js', '--model', 'gemini-1.5-pro'];
+    const argv = await parseArguments();
+    const settings: Settings = {
+      modelRegistry: {
+        currentProvider: 'gemini' as any,
+        currentModel: 'gemini-2.5-flash',
+        providers: {} as any,
+      },
+    };
+    const config = await loadCliConfig(settings, [], 'test-session', argv);
+    expect(config.getModel()).toBe('gemini-1.5-pro');
+  });
+
+  it('should ignore non-Gemini providers in registry for now', async () => {
+    process.argv = ['node', 'script.js'];
+    const argv = await parseArguments();
+    const settings: Settings = {
+      modelRegistry: {
+        currentProvider: 'openai' as any,
+        currentModel: 'gpt-4o',
+        providers: {} as any,
+      },
+    };
+    const config = await loadCliConfig(settings, [], 'test-session', argv);
+    expect(config.getModel()).toBe('gemini-2.5-pro'); // Should fall back to default
+  });
+});
