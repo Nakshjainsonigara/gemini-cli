@@ -1,13 +1,13 @@
-# Gemini CLI
+# AI CLI
 
-[![Gemini CLI CI](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/google-gemini/gemini-cli/actions/workflows/ci.yml)
+[![AI CLI CI](https://github.com/Nakshjainsonigara/ai-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/Nakshjainsonigara/ai-cli/actions/workflows/ci.yml)
 
-![Gemini CLI Screenshot](./docs/assets/gemini-screenshot.png)
+![AI CLI Screenshot](./docs/assets/ai-screenshot.png)
 
-This repository contains the Gemini CLI, a command-line AI workflow tool that connects to your
+This repository contains the AI CLI, a command-line AI workflow tool that connects to your
 tools, understands your code and accelerates your workflows.
 
-With the Gemini CLI you can:
+With the AI CLI you can:
 
 - Query and edit large codebases in and beyond Gemini's 1M token context window.
 - Generate new apps from PDFs or sketches, using Gemini's multimodal capabilities.
@@ -19,7 +19,7 @@ With the Gemini CLI you can:
 
 ## Quickstart
 
-You have two options to install Gemini CLI.
+You have two options to install AI CLI.
 
 ### With Node
 
@@ -27,19 +27,19 @@ You have two options to install Gemini CLI.
 2. **Run the CLI:** Execute the following command in your terminal:
 
    ```bash
-   npx https://github.com/google-gemini/gemini-cli
+   npx https://github.com/Nakshjainsonigara/ai-cli
    ```
 
    Or install it with:
 
    ```bash
-   npm install -g @google/gemini-cli
+   npm install -g @google/ai-cli
    ```
 
    Then, run the CLI from anywhere:
 
    ```bash
-   gemini
+   ai
    ```
 
 ### With Homebrew
@@ -48,13 +48,13 @@ You have two options to install Gemini CLI.
 2. **Install the CLI** Execute the following command in your terminal:
 
    ```bash
-   brew install gemini-cli
+   brew install ai-cli
    ```
 
    Then, run the CLI from anywhere:
 
    ```bash
-   gemini
+   ai
    ```
 
 ### Common Configuration steps
@@ -62,7 +62,7 @@ You have two options to install Gemini CLI.
 3. **Pick a color theme**
 4. **Authenticate:** When prompted, sign in with your personal Google account. This will grant you up to 60 model requests per minute and 1,000 model requests per day using Gemini.
 
-You are now ready to use the Gemini CLI!
+You are now ready to use the AI CLI!
 
 ### Use a Gemini API key:
 
@@ -101,16 +101,16 @@ You can start a project from a new directory:
 
 ```sh
 cd new-project/
-gemini
+ai
 > Write me a Gemini Discord bot that answers questions using a FAQ.md file I will provide
 ```
 
 Or work with an existing project:
 
 ```sh
-git clone https://github.com/google-gemini/gemini-cli
-cd gemini-cli
-gemini
+git clone https://github.com/Nakshjainsonigara/ai-cli
+cd ai-cli
+ai
 > Give me a summary of all of the changes that went in yesterday
 ```
 
@@ -132,7 +132,7 @@ having issues.
 
 ### Explore a new codebase
 
-Start by `cd`ing into an existing or newly-cloned repository and running `gemini`.
+Start by `cd`ing into an existing or newly-cloned repository and running `ai`.
 
 ```text
 > Describe the main pieces of this system's architecture.
