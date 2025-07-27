@@ -15,6 +15,7 @@ import {
   BugCommandSettings,
   TelemetrySettings,
   AuthType,
+  ModelRegistryData,
 } from '@google/gemini-cli-core';
 import stripJsonComments from 'strip-json-comments';
 import { DefaultLight } from '../ui/themes/default-light.js';
@@ -102,6 +103,9 @@ export interface Settings {
   // Add other settings here.
   ideMode?: boolean;
   memoryDiscoveryMaxDirs?: number;
+
+  // Model registry settings for managing multiple AI providers
+  modelRegistry?: ModelRegistryData;
 }
 
 export interface SettingsError {
