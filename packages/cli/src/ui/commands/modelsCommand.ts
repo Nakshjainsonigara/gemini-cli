@@ -11,7 +11,7 @@ import {
   CommandKind,
   MessageActionReturn,
 } from './types.js';
-import { ModelRegistry, ModelProvider } from '@google/gemini-cli-core';
+import { ModelRegistry, ModelProvider } from '@google/ai-cli-core';
 import { SettingScope } from '../../config/settings.js';
 
 function formatModelsList(registry: ModelRegistry): string {

@@ -5,7 +5,7 @@
  */
 
 import { fileURLToPath } from 'url';
-import { Config, IDEConnectionStatus } from '@google/gemini-cli-core';
+import { Config, IDEConnectionStatus } from '@google/ai-cli-core';
 import {
   CommandContext,
   SlashCommand,

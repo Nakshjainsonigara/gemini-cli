@@ -5,7 +5,7 @@
  */
 
 import { describe, expect, it, vi, beforeEach } from 'vitest';
-import { ModelRegistry, ModelProvider } from '@google/gemini-cli-core';
+import { ModelRegistry, ModelProvider } from '@google/ai-cli-core';
 import { modelsCommand } from '../ui/commands/modelsCommand.js';
 import { createMockCommandContext } from '../test-utils/mockCommandContext.js';
 import { SettingScope } from '../config/settings.js';
